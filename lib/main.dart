@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soda/mypage.dart';
 import 'package:soda/write.dart';
 import './moa.dart';
-//import './write.dart';
-//import 'package:image_picker/image_picker.dart';
-//import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -83,27 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 'assets/images/space.png',
               ),
             ),
-/*
-이상한 것 
-            SizedBox(
-              child: OutlinedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.drive_file_rename_outline_outlined,
-                    size: 30, color: Colors.white),
-                label: const Text(
-                  "교환일기 작성하기",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.all(25)),
-              ),
-            ),
-            */
-
             Container(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
@@ -131,12 +107,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-
             SizedBox(
               width: 20,
               height: 20,
             ),
-
             Container(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
@@ -164,25 +138,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-
-            // SizedBox(
-            //   child: OutlinedButton.icon(
-            //     onPressed: () {},
-            //     icon: const Icon(
-            //       Icons.format_list_bulleted,
-            //       size: 30,
-            //       color: Colors.white,
-            //     ),
-            //     // ignore: prefer_const_constructors
-            //     label: Text(
-            //       "교환일기 모아보기",
-            //       style: const TextStyle(
-            //         fontSize: 20,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -1,31 +1,6 @@
-// import 'package:flutter/material.dart';
-
-// class Write extends StatelessWidget {
-//   const Write({super.key});
-
-//   static const String _title = 'Flutter Code Sample';
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: _title,
-//       home: MyStatelessWidget(),
-//     );
-//   }
-// }
-
-// class MyStatelessWidget extends StatelessWidget {
-//   Color unselectedColor = Color(0xff0A0028);
-//   MyStatelessWidget({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import './moa.dart';
+import 'main.dart';
 
 class Write extends StatelessWidget {
   const Write({super.key});
@@ -37,37 +12,24 @@ class Write extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
-      home: MyStatelessWidget(),
+      home: DiaryListPagePartner(),
     );
   }
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  // Color unselectedColor = Color(0xff0A0028);
-  // MyStatelessWidget({super.key});
-  // TabBar get _tabBar => TabBar(
-  //       labelColor: Colors.black,
-  //       unselectedLabelColor: Colors.grey,
-  //       //backgroundColor: Colors.white,
-  //       indicator: BoxDecoration(
-  //         color: Color(0xffF6BDE5),
-  //         borderRadius: BorderRadius.circular(200),
-  //       ),
-  //       tabs: const [
-  //         Tab(
-  //           text: "김태희",
-  //         ),
-  //         Tab(text: "송하연"),
-  //       ],
-  // );
+class DiaryListPagePartner extends StatefulWidget {
+  @override
+  State<DiaryListPagePartner> createState() => _DiaryListPagePartnerState();
+}
 
+class _DiaryListPagePartnerState extends State<DiaryListPagePartner> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 1,
       length: 2,
       child: Scaffold(
-        backgroundColor: Color(0xff0A0028),
+        backgroundColor: const Color(0xff0A0028),
         appBar: AppBar(
           title: const Text('@@@님의 교환일기',
               style: TextStyle(
@@ -85,17 +47,18 @@ class MyStatelessWidget extends StatelessWidget {
                     color: Colors.pink.shade100),
               ),
             )
-            // TextButton(
-            //   text "보내기",
-            //   // style: Colors.amber ,
-            // ),
           ],
-          centerTitle: true, // 중앙 정렬
+          centerTitle: true,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const MyHomePage(title: 'Flutter Demo Home Page')),
+              );
             },
           ),
           backgroundColor: const Color(0xff0A0028),
@@ -112,20 +75,8 @@ class MyStatelessWidget extends StatelessWidget {
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintText: '제목을 입력하세요',
-                      hintStyle: TextStyle(color: Colors.grey)
-                      //labelText: '제목을 입력하세요',
-                      //labelStyle: TextStyle(color: Colors.white),
-                      //TextStyle(color: Colors.pinkAccent),
-                      ),
+                      hintStyle: TextStyle(color: Colors.grey)),
                 ),
-
-                // child: TextField(
-                //   decoration: InputDecoration(labelText: '제목을 입력하세요.'),
-                // )
-                // child: Text(
-                //   "제목을 입력하세요",
-                //   style: TextStyle(fontSize: 25, color: Colors.grey),
-                // ),
               ),
               Divider(
                 height: 30,
@@ -145,17 +96,10 @@ class MyStatelessWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                // 여기 투명의 사이즈박스가 있는 것임.
+                //(패딩대신)크기를 위한 sizedbox입니다.
                 height: 331,
                 width: 392,
               )
-              // Container(
-              //   padding: const EdgeInsets.all(16.0),
-              //   decoration:
-              //       BoxDecoration(border: Border.all(), color: Colors.green),
-              //   height: 331,
-              //   width: 392,
-              // ),
             ],
           ),
         ),
