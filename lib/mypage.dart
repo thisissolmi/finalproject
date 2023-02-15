@@ -1,4 +1,4 @@
-//마이페이지 화면 구현. 프뢸 화면
+//마이페이지 화면 구현. 프로필 화면
 import 'package:flutter/material.dart';
 
 class Mypage extends StatefulWidget {
@@ -27,37 +27,120 @@ class _MypageState extends State<Mypage> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(30),
-            child: Container(
-              //decoration: ,
-              child: Text(
-                "dddd",
-                style: TextStyle(fontSize: 17, color: Colors.white),
+      body: SizedBox(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 30, 0, 20),
+              child: Container(
+                height: 102,
+                width: 343,
+                decoration: //color: Color(0xffF693D7
+                    BoxDecoration(
+                  border: Border.all(color: const Color(0xffF693D7)),
+                  borderRadius: BorderRadius.circular(5),
+                  color: const Color(0xff0A0028),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                          child: Text(
+                            "닉네임",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Text("김태희",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                            20,
+                            0,
+                            20,
+                            0,
+                          ),
+                          child: Text(
+                            "가입일",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Text(
+                          "2023년 2월 14일 ",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          // SizedBox(
-          //   child: Text("닉네임",
-          //       style: TextStyle(
-          //           // fontWeight: FontWeight.bold, //볼드처리 된 부분
-          //           fontSize: 17,
-          //           color: Colors.white)),
-          // ),
-          // Container(
-          //   width: 20,
-          //   height: 20,
-          //   color: Colors.white,
-          // ),
-        ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 300,
+                  child: Text(
+                    "현재 앱 버전",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  child: Text("제작자들_우솔팀",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      )),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  child: Text("회원탈퇴",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      )),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 /*
+cColor.fromARGB(255, 148, 89, 89)             "현재 앱 버전",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+             */
+/*
+
+
+
 import 'package:flutter/material.dart';
 
 class Moa extends StatelessWidget {

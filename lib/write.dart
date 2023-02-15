@@ -119,13 +119,7 @@ class MyStatelessWidget extends StatelessWidget {
                       ),
                 ),
 
-                // child: TextField(
-                //   decoration: InputDecoration(labelText: '제목을 입력하세요.'),
-                // )
-                // child: Text(
-                //   "제목을 입력하세요",
-                //   style: TextStyle(fontSize: 25, color: Colors.grey),
-                // ),
+              
               ),
               Divider(
                 height: 30,

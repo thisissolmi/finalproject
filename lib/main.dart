@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:soda/mypage.dart';
 import 'package:soda/write.dart';
 import './moa.dart';
+import "./splahpage.dart";
+import './join.dart';
+
 //import './write.dart';
 //import 'package:image_picker/image_picker.dart';
 //import 'dart:io';
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'hello soda',
       theme: ThemeData(
+        fontFamily: 'text',
         // useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
@@ -42,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Color(0xff0A0028),
       appBar: AppBar(
-        backgroundColor: Color(0xff0A0028),
+        backgroundColor: const Color(0xff0A0028),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
@@ -72,15 +76,17 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               '김태희님 ❤ 송하연님' '\n\n' '       함께 기록한지' '\n' '      400(변수)일째',
               style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+                fontFamily: '12롯데마트드림',
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(
               height: 350,
-              width: 300,
+              width: 350,
               child: Image.asset(
-                'assets/images/space.png',
+                'assets/images/sspace.png',
               ),
             ),
 /*
@@ -107,7 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(width: 2.0, color: Colors.white),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30) //모서리
+                      ),
+                  side: BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -124,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text(
                     "교환일기 작성하기",
                     style: TextStyle(
+                      fontFamily: '12롯데마트드림',
                       fontSize: 20,
                       color: Colors.white,
                     ),
@@ -140,7 +150,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(width: 2.0, color: Colors.white),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30) //모서리
+                      ),
+                  side: BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -157,6 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text(
                     "교환일기 모아보기",
                     style: TextStyle(
+                      fontFamily: '12롯데마트드림',
                       fontSize: 20,
                       color: Colors.white,
                     ),
