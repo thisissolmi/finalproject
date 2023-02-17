@@ -29,18 +29,16 @@ class _SignupState extends State<Signup> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-
-        
-           TextField(
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.center,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      hintText: '이름을 입력해주세요',
-                      hintStyle: TextStyle(color: Colors.grey), 
-                  ),
+            TextField(
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+              autofocus: true,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                hintText: '이름을 입력해주세요',
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
             ),
           ],
         ),

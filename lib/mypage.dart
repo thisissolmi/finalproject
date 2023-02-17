@@ -86,41 +86,103 @@ class _MypageState extends State<Mypage> {
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 300,
-                  child: Text(
-                    "현재 앱 버전",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  child: Text("제작자들_우솔팀",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      )),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  child: Text("회원탈퇴",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      )),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 20, 16, 5),
+              child: Column(
+                children: [
+                  SizedBox(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "현재 앱 버전",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 180,
+                          ),
+                          Text(
+                            "0.0.1",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "제작자들",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 220,
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Mypage(),
+                              //   ),
+                              // );
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "로그아웃",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 220,
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Mypage(),
+                              //   ),
+                              // );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ))
+                ],
+              ),
             ),
           ],
         ),

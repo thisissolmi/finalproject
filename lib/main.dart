@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'hello soda',
       theme: ThemeData(
-        fontFamily: 'text',
+        fontFamily: 'Lotte',
         // useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
@@ -49,11 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: const Color(0xff0A0028),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+              size: 30,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -70,26 +69,68 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              '김태희님 ❤ 송하연님' '\n\n' '       함께 기록한지' '\n' '      400(변수)일째',
-              style: TextStyle(
-                fontFamily: '12롯데마트드림',
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
             SizedBox(
-              height: 350,
-              width: 350,
-              child: Image.asset(
-                'assets/images/sspace.png',
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        '김태희',
+                        style: TextStyle(
+                          fontFamily: 'Lotte',
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset('assets/images/heart.png'),
+                      ),
+                      const Text(
+                        '송하연',
+                        style: TextStyle(
+                          fontFamily: 'Lotte',
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    child: Column(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "우리 만난지 400일 째",
+                            style: TextStyle(
+                              fontFamily: 'Lotte',
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 350,
+                    width: 350,
+                    child: Image.asset(
+                      'assets/images/sspace.png',
+                    ),
+                  ),
+                ],
               ),
             ),
+
 /*
+
+          
 이상한 것 
             SizedBox(
               child: OutlinedButton.icon(
@@ -129,12 +170,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: const Icon(Icons.drive_file_rename_outline_outlined,
                     size: 30, color: Colors.white),
                 label: Padding(
-                  padding: const EdgeInsets.all(7.0),
+                  padding: const EdgeInsets.all(20),
                   child: const Text(
                     "교환일기 작성하기",
                     style: TextStyle(
-                      fontFamily: '12롯데마트드림',
-                      fontSize: 20,
+                      fontFamily: 'Lotte',
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -143,8 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             SizedBox(
-              width: 20,
-              height: 20,
+              height: 30,
             ),
 
             Container(
@@ -166,12 +206,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: const Icon(Icons.format_list_bulleted,
                     size: 30, color: Colors.white),
                 label: Padding(
-                  padding: const EdgeInsets.all(7.0),
+                  padding: const EdgeInsets.all(20),
                   child: const Text(
                     "교환일기 모아보기",
                     style: TextStyle(
-                      fontFamily: '12롯데마트드림',
-                      fontSize: 20,
+                      fontFamily: 'Lotte',
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),

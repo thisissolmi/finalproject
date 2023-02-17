@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soda/write.dart';
 
 class Moa extends StatelessWidget {
   const Moa({super.key});
@@ -10,6 +11,9 @@ class Moa extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
+      theme: ThemeData(
+        fontFamily: 'Lotte',
+      ),
       home: MyStatelessWidget(),
     );
   }
@@ -28,6 +32,7 @@ class MyStatelessWidget extends StatelessWidget {
         ),
         tabs: const [
           Tab(
+            // child: Text("김태희"),
             text: "김태희",
           ),
           Tab(text: "송하연"),
@@ -37,7 +42,7 @@ class MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 0,
+      initialIndex: 1,
       length: 2,
       child: Scaffold(
         backgroundColor: Color(0xff0A0028),
@@ -56,46 +61,208 @@ class MyStatelessWidget extends StatelessWidget {
           backgroundColor: const Color(0xff0A0028),
           bottom: PreferredSize(
               preferredSize: _tabBar.preferredSize,
-              child: Container(
-                width: 315,
-                height: 60,
-                decoration: BoxDecoration(
-                    border: Border.all(color: unselectedColor, width: 1),
-                    color: unselectedColor,
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1.0, color: Color(0xffF6BDE5)),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: _tabBar),
+                  width: 315,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: unselectedColor, width: 0.5),
+                      color: unselectedColor,
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                  child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 1.0, color: Color(0xffF6BDE5)),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: _tabBar),
+                ),
               )),
         ),
-        body: Row( // fl
-          children: const [
-            Padding(
-              padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
-              child: SizedBox(
-                  child: Text(
-                "총 @개",
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              )),
-            ),
-            // SizedBox(
-            //   width: 30,
-            //   height: 50,
+        body:
+            //  ListView(
+            //   children: [
+            //     Column(
+            //       children: [
+            //         Row(
+            //           children: const [
+            //             Padding(
+            //               padding: EdgeInsets.fromLTRB(32, 30, 0, 0),
+            //               child: SizedBox(
+            //                 child: Text(
+            //                   "총 6개", // 변수
+            //                   style: TextStyle(color: Colors.white, fontSize: 15),
+            //                 ),
+            //               ),
+            //             ),
+            //             Padding(
+            //               padding: EdgeInsets.fromLTRB(233, 30, 0, 0),
+            //               child: SizedBox(
+            //                 child: Text(
+            //                   "최신순",
+            //                   style: TextStyle(color: Colors.white, fontSize: 15),
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            //           child: Row(
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(22, 3, 9, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     // 이미지
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //               /////////////////////////////////
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(8, 3, 22, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            //           child: Row(
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(22, 3, 9, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //               /////////////////////////////////
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(8, 3, 22, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            //           child: Row(
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(22, 3, 9, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //               /////////////////////////////////
+            //               Padding(
+            //                 padding: const EdgeInsets.fromLTRB(8, 3, 22, 33),
+            //                 child: SizedBox(
+            //                   height: 206,
+            //                   width: 157,
+            //                   child: Card(
+            //                     shape: RoundedRectangleBorder(
+            //                       borderRadius: BorderRadius.circular(15.0),
+            //                       side: BorderSide(width: 1.0),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
             // ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-              child: SizedBox(
-                child: Text("최신순"),
+
+            /* 
+            Tabbar view 안에 Listview 를 넣고 싶은데 어떻게 하지?
+             */
+            const TabBarView(
+          children: <Widget>[
+            Center(
+              child: Text(
+                "User 1",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            Center(
+              child: Text(
+                "작성된 교환일기가 없습니다.",
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ],
-          
         ),
-        // //const TabBarView(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Write(),
+              ),
+            );
+          },
+          child: const Icon(
+            Icons.drive_file_rename_outline,
+            size: 27,
+            color: Colors.black,
+          ),
+
+          // 하려고 했던 이미지
+          // child: Image(
+          //   image: AssetImage(
+          //     "images/pencil.png",
+          //   ),
+          //   color: Colors.blue,
+          //   colorBlendMode: BlendMode.difference,
+          // ),
+
+          backgroundColor: Color(0xFFF6BDE5),
+        ),
+
+        // TabBarView(
         //   children: <Widget>[
         //     Center(
         //       child: Text(
@@ -126,5 +293,3 @@ class MyStatelessWidget extends StatelessWidget {
     );
   }
 }
-
-
