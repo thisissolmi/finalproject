@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DataProvider {
   static String? titles;
@@ -18,6 +19,7 @@ class Data {
   final String? content;
   final String? image;
   final String? docId;
+
   Data({
     required this.docId,
     required this.title,
@@ -56,3 +58,10 @@ const String imageUrlFieldName = "image-url";
 const String contentFieldName = "content";
 const String keywordsFieldName = "keywords";
 const String usernameFieldName = "username";
+
+// class UserManagement {
+//   getData() async{
+//     String userId = (await FirebaseAuth.instance.currentUser()).uid;
+//     return FirebaseFirestore.instance.collection('users').doc(userId);
+//   }
+// }

@@ -1,13 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dariyproject/diarydata.dart';
+import 'package:dariyproject/diaryinfo.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'main.dart';
 import 'fontstyle.dart';
 import 'write.dart';
-import 'package:intl/intl.dart';
+import 'home.dart';
 
 class Readpage extends StatelessWidget {
   const Readpage({super.key});

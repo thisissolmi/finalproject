@@ -1,13 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dariyproject/diarydata.dart';
+import 'package:dariyproject/diaryinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'main.dart';
 import 'fontstyle.dart';
 import 'readpage.dart';
 import 'package:intl/intl.dart';
+import 'home.dart';
 
 class Write extends StatelessWidget {
   const Write({super.key});
@@ -143,7 +144,7 @@ class _WirttingDiarypageState extends State<WirttingDiarypage> {
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               hintText: '제목을 입력하세요',
-              hintStyle: TextStyle(color: Colors.grey)),
+              hintStyle: TextStyle(color: Color(0xff9D99A9))),
           textInputAction: TextInputAction.go,
           onChanged: (value) {
             log(value);
@@ -162,7 +163,7 @@ class _WirttingDiarypageState extends State<WirttingDiarypage> {
           endIndent: 20,
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(nowdatetime,
               style: fontsmiddle, textAlign: TextAlign.center),
         ),

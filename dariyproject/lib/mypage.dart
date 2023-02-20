@@ -1,6 +1,10 @@
-//마이페이지 화면 구현. 프로필 화면
+import 'package:dariyproject/fontstyle.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import './main.dart';
+
+//마이페이지 화면 구현. 프로필 화면
 
 class Mypage extends StatefulWidget {
   const Mypage({super.key});
@@ -32,17 +36,16 @@ class _MypageState extends State<Mypage> {
         ),
       ),
       body: Column(
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: SizedBox(
-              //decoration: ,
+        children: [
+          GestureDetector(
+            onTap: () async {},
+            child: const Center(
               child: Text(
-                "dddd",
-                style: TextStyle(fontSize: 17, color: Colors.white),
+                '로그아웃',
+                style: fontboldsmall,
               ),
             ),
-          ),
+          )
         ],
       ),
     );
