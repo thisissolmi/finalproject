@@ -13,7 +13,7 @@ class Moa extends StatelessWidget {
         fontFamily: 'Lotte',
       ),
       //폰트 적용 여기에 넣는 거 아닌가?
-      home: DiaryListPage(),
+      home: const DiaryListPage(),
     );
   }
 }
@@ -128,7 +128,7 @@ class _DiaryListPageState extends State<DiaryListPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Write(),
+                builder: (context) => const Write(),
               ),
             );
           },
@@ -148,7 +148,7 @@ class _DiaryListPageState extends State<DiaryListPage> {
           //   colorBlendMode: BlendMode.difference,
           // ),
 
-          backgroundColor: Color(0xFFF6BDE5),
+          backgroundColor: const Color(0xFFF6BDE5),
         ),
       ),
     );

@@ -15,16 +15,16 @@ class _MypageState extends State<Mypage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0A0028),
+      backgroundColor: const Color(0xff0A0028),
       appBar: AppBar(
-        backgroundColor: Color(0xff0A0028),
+        backgroundColor: const Color(0xff0A0028),
         title: const Text(
           '마이페이지',
         ),
         centerTitle: true, // 중앙 정렬
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -98,7 +98,7 @@ class _MypageState extends State<Mypage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children: [
+                        children: const [
                           Text(
                             "현재 앱 버전",
                             style: TextStyle(
@@ -118,21 +118,21 @@ class _MypageState extends State<Mypage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "제작자들",
                             style: TextStyle(
                               fontSize: 17,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 230),
+                          const SizedBox(width: 230),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_forward_ios,
                               size: 20,
                               color: Colors.white,
@@ -141,26 +141,26 @@ class _MypageState extends State<Mypage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Jaejak(),
+                                  builder: (context) => const Jaejak(),
                                 ),
                               );
                             },
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "로그아웃",
                             style: TextStyle(
                               fontSize: 17,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 230,
                           ),
                           IconButton(

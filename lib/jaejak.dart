@@ -16,16 +16,16 @@ class _JaejakState extends State<Jaejak> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0A0028),
+      backgroundColor: const Color(0xff0A0028),
       appBar: AppBar(
-        backgroundColor: Color(0xff0A0028),
+        backgroundColor: const Color(0xff0A0028),
         title: const Text(
           '제작자들',
         ),
         centerTitle: true, // 중앙 정렬
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,7 +34,7 @@ class _JaejakState extends State<Jaejak> {
       body: Container(
         width: 800,
         height: 700,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image:
                 DecorationImage(image: AssetImage('assets/images/jaejae.png'))),
       ),

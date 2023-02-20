@@ -12,9 +12,9 @@ class _JoinState extends State<Join> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0A0028),
+      backgroundColor: const Color(0xff0A0028),
       appBar: AppBar(
-        backgroundColor: Color(0xff0A0028),
+        backgroundColor:const Color(0xff0A0028),
       ),
       body: Center(
         child: Column(

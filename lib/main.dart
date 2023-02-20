@@ -14,7 +14,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const AppHome()); //(const Homepage());
+  runApp(const Homepage());
 }
 
 class Homepage extends StatelessWidget {
@@ -23,18 +23,18 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Lotte',
-          // useMaterial3: true,
-          primarySwatch: Colors.blue,
-        ),
-        // theme: ThemeData(
-        //   // useMaterial3: true,
-        //   primarySwatch: Colors.blue,
-        // ),
-        home: AppHome() //Splash() //const MyHomePage(),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Lotte',
+        // useMaterial3: true,
+        primarySwatch: Colors.blue,
+      ),
+      // theme: ThemeData(
+      //   // useMaterial3: true,
+      //   primarySwatch: Colors.blue,
+      // ),
+      home: Splash(), //const MyHomePage(),
+    );
   }
 }
 
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30) //모서리
                       ),
-                  side: BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
+                  side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -149,9 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 icon: const Icon(Icons.drive_file_rename_outline_outlined,
                     size: 30, color: Colors.white),
-                label: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: const Text(
+                label: const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
                     "교환일기 작성하기",
                     style: TextStyle(
                       fontFamily: 'Lotte',
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
 
@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30) //모서리
                       ),
-                  side: BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
+                  side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -185,9 +185,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 icon: const Icon(Icons.format_list_bulleted,
                     size: 30, color: Colors.white),
-                label: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: const Text(
+                label: const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
                     "교환일기 모아보기",
                     style: TextStyle(
                       fontFamily: 'Lotte',
@@ -205,103 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class AppHome extends StatelessWidget {
-  const AppHome({Key? key}) : super(key: key);
 
-  //static bool to indicate the launching of the app
-  static bool launch = true;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: launch
-          ? FutureBuilder(
-              future: Future.delayed(const Duration(seconds: 3)),
-              builder: (ctx, timer) =>
-                  timer.connectionState == ConnectionState.done
-                      ? const Myhomepage(title: 'Flutter Demo Home Page')
-                      : appSplashScreen(),
-            )
-          : const Myhomepage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class Myhomepage extends StatefulWidget {
-  const Myhomepage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<Myhomepage> createState() => _MyhomepageState();
-}
-
-class _MyhomepageState extends State<Myhomepage> {
-  @override
-  Widget build(BuildContext context) {
-    //mack sure your splash screen only launch once at your app starting
-    if (AppHome.launch) {
-      AppHome.launch = false;
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: Text(
-          'My Second screen',
-        ),
-      ),
-    );
-  }
-}
-
-Widget appSplashScreen() {
-  return Container(
-    decoration: const BoxDecoration(
-      ////you can add background image/color to your splash screen
-      // image: DecorationImage(
-      //   image: AssetImage('assets/background.png'),
-      //   fit: BoxFit.cover,
-      // ),
-      color: Colors.white,
-    ),
-    child: Center(
-      child: SizedBox(
-        //get MediaQuery from instance of window to get height and width (no need of context)
-        height: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                .size
-                .height *
-            0.5,
-        width: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                .size
-                .width *
-            0.5,
-        child: Column(
-          children: const [
-            ////you can add image to your splash screen
-            // Image(
-            //   image: AssetImage('assets/splashscreen_image.png'),
-            // ),
-            FittedBox(
-                child: Text(
-              'Loading',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                decoration: TextDecoration.none,
-              ),
-            )),
-            CircularProgressIndicator(),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-///////
 
 
 /*
@@ -437,5 +341,4 @@ Widget appSplashScreen() {
     );
   }
 }
-
 */
