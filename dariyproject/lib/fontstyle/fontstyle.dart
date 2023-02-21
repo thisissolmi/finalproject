@@ -23,3 +23,15 @@ const TextStyle fontsmiddle = TextStyle(
   fontSize: 12,
   color: Colors.white,
 );
+const TextStyle fontsmiddlinsignup = TextStyle(
+  //fontFamily: 'Pretendard',
+  fontSize: 18,
+  color: Colors.white,
+);
+const TextStyle loginpageloginblack = TextStyle(
+  //fontFamily: 'Pretendard',
+  fontSize: 18,
+  color: Colors.white,
+);
+const TextStyle homepagecouple =
+    TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);

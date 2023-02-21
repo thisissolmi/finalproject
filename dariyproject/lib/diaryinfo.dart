@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 class DataProvider {
   static String? titles;
@@ -18,6 +16,7 @@ class Data {
   final String? content;
   final String? image;
   final String? docId;
+
   Data({
     required this.docId,
     required this.title,

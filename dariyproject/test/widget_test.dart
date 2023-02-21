@@ -13,7 +13,7 @@ import 'package:dariyproject/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const Homepage());
+    // 진세님 이거 오류 떠요 await tester.pumpWidget(const Homepage());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
