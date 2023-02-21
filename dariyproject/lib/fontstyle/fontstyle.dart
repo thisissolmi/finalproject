@@ -33,3 +33,5 @@ const TextStyle loginpageloginblack = TextStyle(
   fontSize: 18,
   color: Colors.white,
 );
+const TextStyle homepagecouple =
+    TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);

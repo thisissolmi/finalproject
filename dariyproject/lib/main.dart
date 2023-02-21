@@ -1,13 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dariyproject/Info.dart';
+import 'package:dariyproject/auth/Info.dart';
 import './home.dart';
-import 'package:dariyproject/fontstyle.dart';
+import 'package:dariyproject/fontstyle/fontstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import './singuppage.dart';
+import 'auth/singuppage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
@@ -169,22 +169,21 @@ class LoginpartState extends State<Loginpart> {
                         await _authentication.signInWithEmailAndPassword(
                             email: user_email, password: user_password);
                     log(user_email);
-                    final user = FirebaseAuth.instance.currentUser!;
-                    final documentReference = FirebaseFirestore.instance
-                        .collection('user')
-                        .doc(user.uid);
-                    final docSnapshot = await documentReference.get();
-                    print(docSnapshot.exists);
-                    if (docSnapshot.exists == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Homepage()),
-                      );
-                    }
                   } catch (e) {
                     print(e);
                     return;
+                  }
+                  final user = FirebaseAuth.instance.currentUser!;
+                  final documentReference = FirebaseFirestore.instance
+                      .collection('user')
+                      .doc(user.uid);
+                  final docSnapshot = await documentReference.get();
+                  print(docSnapshot.exists);
+                  if (docSnapshot.exists == true) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Homepage()),
+                    );
                   }
                 },
                 child: Container(

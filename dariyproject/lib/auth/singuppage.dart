@@ -1,16 +1,11 @@
-import 'package:dariyproject/Info.dart';
-import 'package:dariyproject/fontstyle.dart';
+import 'package:dariyproject/auth/Info.dart';
+import 'package:dariyproject/fontstyle/fontstyle.dart';
 import 'package:dariyproject/home.dart';
 import 'package:flutter/material.dart';
-import 'mypage.dart';
-import 'write.dart';
-import 'moa.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import './main.dart';
+import '../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'Info.dart';
 
 class SignUppage extends StatelessWidget {
   const SignUppage({super.key});
@@ -57,6 +52,7 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
   String user_name = '';
   String user_email = '';
   String user_password = '';
+  String partner_email = '';
   final _formkey2 = GlobalKey<FormState>();
   void _tryValidation() {
     final isValid = _formkey2.currentState!.validate();
@@ -74,14 +70,14 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            padding: EdgeInsets.only(top: 10.0, left: 15.0),
             child: Text(
               '이름',
               style: fontsmiddlinsignup,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            padding: EdgeInsets.only(top: 10.0, left: 15.0),
             child: TextFormField(
               key: const ValueKey(1),
               style: const TextStyle(color: Colors.white),
@@ -109,7 +105,7 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            padding: const EdgeInsets.only(top: 10.0, left: 15.0),
             child: TextFormField(
               key: const ValueKey(2),
               style: const TextStyle(color: Colors.white),
@@ -137,7 +133,7 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            padding: EdgeInsets.only(top: 10.0, left: 15.0),
             child: TextFormField(
               key: const ValueKey(3),
               style: const TextStyle(color: Colors.white),
@@ -164,6 +160,34 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
               },
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(top: 10.0, left: 15.0),
+            child: TextFormField(
+              key: const ValueKey(4),
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 5,
+                      color: Colors.white,
+                    ),
+                  ),
+                  hintText: 'ex)상대방 email을 적어주세요',
+                  hintStyle: TextStyle(color: Color(0xff9D99A9), fontSize: 17)),
+              validator: ((value) {
+                if (value!.isEmpty || !value.contains('@')) {
+                  return '최소 7자 이상 적어주세요';
+                }
+                return null;
+              }),
+              onChanged: (value) {
+                partner_email = value;
+              },
+              onSaved: (value) {
+                partner_email = value!;
+              },
+            ),
+          ),
           GestureDetector(
               onTap: () async {
                 _tryValidation();
@@ -174,22 +198,30 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
                 } catch (e) {
                   print(e);
                 }
+                final db = FirebaseFirestore.instance;
                 final user = FirebaseAuth.instance.currentUser!;
-
-                final userdocref = await FirebaseFirestore.instance
-                    .collection('user')
-                    .doc(user.uid)
-                    .set({
-                  'user_name': user_name,
-                  'user_email': user_email,
-                  'user_password': user_password,
-                  'user_uid': user.uid,
+                final docref = db.collection('user').doc(user.uid);
+                await docref.set({
+                  user_nameFieldName: user_name,
+                  user_emailFieldName: user_email,
+                  user_passwordFieldName: user_password,
+                  user_uidFieldName: user.uid,
+                  partner_emailFieldName: partner_email,
                 });
-                // ignore_for_file: use_build_context_synchronously
+                final docsnapshot = await docref.get();
+                if (docsnapshot.data() == null) {
+                  return;
+                }
+                final datasnapsot = docsnapshot.data()!;
+
+                UserProvider.user_name = datasnapsot[user_nameFieldName];
+                UserProvider.partner_email =
+                    datasnapsot[partner_emailFieldName];
+                // ignore: use_build_context_synchronously
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: ((context) => const Loginpagepart())));
+                        builder: ((context) => const Partnerpage())));
               },
               child: Container(
                 width: 100,
@@ -201,9 +233,96 @@ class _SignUppagebadypartState extends State<SignUppagebadypart> {
                     style: loginpageloginblack,
                   ),
                 ),
-              ))
+              )),
         ],
       ),
+    );
+  }
+}
+
+class Partnerpage extends StatelessWidget {
+  const Partnerpage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: Partnertextfield(),
+      ),
+    );
+  }
+}
+
+class Partnertextfield extends StatefulWidget {
+  const Partnertextfield({super.key});
+
+  @override
+  State<Partnertextfield> createState() => _PartnertextfieldState();
+}
+
+class _PartnertextfieldState extends State<Partnertextfield> {
+  final _authentication = FirebaseAuth.instance;
+  String partner_email = '';
+  final _formkeypart = GlobalKey<FormState>();
+  void _tryValidation() {
+    final isValid = _formkeypart.currentState!.validate();
+    if (isValid) {
+      _formkeypart.currentState!.save();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Form(
+            key: _formkeypart,
+            child: TextFormField(
+              key: const ValueKey(1),
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 5,
+                      color: Colors.white,
+                    ),
+                  ),
+                  hintText: 'ex)파트너 email이름',
+                  hintStyle: TextStyle(color: Color(0xff9D99A9), fontSize: 17)),
+              validator: ((value) {
+                if (value!.isEmpty || value.length > 2) {
+                  return '최소 3자 이상 적어주세요';
+                }
+                return null;
+              }),
+              onChanged: (value) {
+                partner_email = value;
+              },
+              onSaved: (value) {
+                partner_email = value!;
+              },
+            )),
+        GestureDetector(
+            onTap: () async {
+              final db = FirebaseFirestore.instance;
+              final user = FirebaseAuth.instance.currentUser!;
+              final docref = db
+                  .collection('user')
+                  .where(user_emailFieldName, isEqualTo: partner_email)
+                  .get();
+            },
+            child: Container(
+              width: 100,
+              height: 50,
+              color: const Color(0xffF6BDE5),
+              child: const Center(
+                child: Text(
+                  '완료',
+                  style: loginpageloginblack,
+                ),
+              ),
+            )),
+      ],
     );
   }
 }

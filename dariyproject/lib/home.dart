@@ -1,10 +1,12 @@
-import 'package:dariyproject/Info.dart';
+import 'package:dariyproject/auth/Info.dart';
+import 'package:dariyproject/fontstyle/fontstyle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './mypage.dart';
 import './write.dart';
 import './moa.dart';
-import './Info.dart';
+import 'auth/singuppage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //home 화면
 class Homepage extends StatelessWidget {
@@ -31,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String? name = UserProvider.user_name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xff0A0028),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
@@ -58,18 +57,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 20,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${UserProvider.user_name.toString()}님",
+                    style: homepagecouple,
+                  ),
+                  const Text(' ❤ '),
+                  Text("${UserProvider.partner_name.toString()}님",
+                      style: homepagecouple),
+                ],
+              ),
               const Text(
-                '김태희님 ❤ 송하연님'
-                '\n\n'
-                '       함께 기록한지'
+                '함께 기록한지'
                 '\n'
-                '      400(변수)일째',
+                '400(변수)일째',
                 style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:dariyproject/diaryinfo.dart';
 import 'package:flutter/material.dart';
-import 'fontstyle.dart';
+import 'fontstyle/fontstyle.dart';
 import 'write.dart';
 import 'home.dart';
 
