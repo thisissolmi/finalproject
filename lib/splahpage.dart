@@ -4,7 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:neeww/main.dart';
 // import 'package:flutter_gifimage/flutter_gifimage.dart';
-import 'dart:async'; //Timer
+import 'dart:async';
+
+import 'package:neeww/onboarding.dart'; //Timer
 
 void main() {
   runApp(const Homepage());
@@ -29,7 +31,7 @@ class _SplashState extends State<Splash> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const MyHomePage(),
+            builder: (context) => const OnBoardingPage(),
           ),
         );
       },
