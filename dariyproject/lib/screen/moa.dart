@@ -102,7 +102,7 @@ class _DiaryListPageState extends State<DiaryListPage> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    '총' '${counter ?? '0'}' '개',
+                    '총' '${counter}' '개',
                     style: fontboldsmall,
                   ),
                 ),
@@ -181,7 +181,7 @@ class Tabbarviewinmoa extends StatefulWidget {
   State<Tabbarviewinmoa> createState() => TabbarviewinmoaState();
 }
 
-int? counter;
+int counter = 0;
 
 class TabbarviewinmoaState extends State<Tabbarviewinmoa> {
   String? Imageurleach;
