@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'main.dart';
-import 'fontstyle.dart';
+import 'fontstyle/fontstyle.dart';
 import 'readpage.dart';
 import 'package:intl/intl.dart';
 import 'dart:html';

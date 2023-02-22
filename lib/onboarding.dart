@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:neeww/auth/login.dart';
+import 'package:page_indicator/page_indicator.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({super.key});
+class Onboarding extends StatelessWidget {
+  const Onboarding({super.key});
 
-  @override
-  State<Splash> createState() => _SplashState();
-}
+  static const String _title = 'Flutter Code Sample';
 
-class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: _title,
+      home: MainPage(),
+    );
   }
 }
 
 class MainPage extends StatefulWidget {
   const MainPage({
+    backgroundColor: const Color(0xff0A0028),
     Key? key,
   }) : super(key: key);
 
@@ -25,26 +29,32 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
+
   final _imageAssets = const [
-    'assets/phone1.png',
-    'assets/phone2.png',
-    'assets/phone3.png',
+    'assets/images/page1.png',
+    'assets/images/page2.png',
+    'assets/images/page3.png',
+    'assets/images/page3.png',
   ];
   late final PageController controller;
   Widget _pageIndicator() {
     final List<Widget> list = [];
+
     Color indicatorColor;
+
     for (int i = 0; i < _imageAssets.length; i++) {
       if (i == _currentPageIndex) {
-        indicatorColor = const Color(0xFF182949);
+        indicatorColor = const Color(0xFFF6BDE5);
       } else {
         indicatorColor = const Color(0xFFD8D8D8);
       }
       list.add(Padding(
-        padding: const EdgeInsets.only(right: 8.0),
-        child: CircleAvatar(
-          radius: 6,
-          backgroundColor: indicatorColor,
+        padding: const EdgeInsets.only(right: 10.0),
+        child: Container(
+          width: 10,
+          height: 10,
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, color: indicatorColor),
         ),
       ));
     }
@@ -69,22 +79,50 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    backgroundColor:
+    const Color(0xff0A0028);
     return Scaffold(
-      body: PageView.builder(
-        onPageChanged: (value) {
-          setState(() {
-            _currentPageIndex = value;
-          });
-        },
-        controller: controller,
-        itemCount: _imageAssets.length,
-        itemBuilder: (context, index) {
-          return BasePage(
-            imageAsset: _imageAssets[index],
-          );
-        },
+      backgroundColor: const Color(0xff0A0028),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: MediaQuery.of(context).viewPadding.top),
+              SizedBox(
+                height: 30,
+              ),
+              _pageIndicator(),
+              Container(
+                height: 60,
+              ),
+            ],
+          ),
+          // Spacer(),
+          Flexible(
+            child: PageView.builder(
+              onPageChanged: (value) {
+                setState(() {
+                  _currentPageIndex = value;
+                });
+              },
+              controller: controller,
+              itemCount: _imageAssets.length,
+              itemBuilder: (context, index) {
+                if (index >= 3) {
+                  return const Loginpagepart();
+                }
+                return BasePage(
+                  imageAsset: _imageAssets[index],
+                );
+              },
+            ),
+          ),
+        ],
       ),
-      bottomSheet: _pageIndicator(),
+      //bottomSheet: _pageIndicator(),
     );
   }
 }
@@ -96,20 +134,8 @@ class BasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 200,
-        ),
-        Image.asset(imageAsset),
-        const Text(
-          "Copyright 2023 SODA. All right reserved.",
-          style: TextStyle(
-            color: Color(0xFFB7B6B6),
-          ),
-        ),
-      ],
+    return Center(
+      child: SizedBox(width: 500, child: Image.asset(imageAsset)),
     );
   }
 }

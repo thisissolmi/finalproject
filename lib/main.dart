@@ -8,6 +8,10 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter_gifimage/flutter_gifimage.dart';
 import './splahpage.dart';
+// import 'package:fancy_on_boarding/fancy_on_boarding.dart';
+import './page1.dart';
+import './onboarding.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,10 +37,62 @@ class Homepage extends StatelessWidget {
       //   // useMaterial3: true,
       //   primarySwatch: Colors.blue,
       // ),
-      home: Splash(), //const MyHomePage(),
+      home: const Splash(),
     );
   }
 }
+
+/*
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Splash(), // onboarding.dart 파일의 OnBoardingPage()를 실행하도록 지정
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Scaffold 위젯을 불러와 AppBar를 만듬
+      appBar: AppBar(
+        // Flutter 2.5 버전부터 한 번 정해지면 바뀌지 않는 데이터를 사용하는 위젯 앞에는 const 키워드를 붙이도록 되어있음
+        title: const Text('Main Page'),
+      ),
+      body: Center(
+        // Center 위젯을 불러와 child로 Column 위젯을 불러옴
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text(
+            'Main Screen',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          ElevatedButton(
+            // ElevatedButton 위젯 생성
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const OnBoardingPage()), // MyPage 위젯 리턴
+              );
+            },
+            child: const Text('Go to OnBoarding Screen'),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+*/
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -51,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: const Color(0xff0A0028),
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 홈화면 (앱바) 에서 뒤로가기 없애는 것임. 
         backgroundColor: const Color(0xff0A0028),
         actions: [
           IconButton(
@@ -121,8 +178,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 350,
-                    width: 350,
+                    height: 330, //원래는 350이야 둘 다
+                    width: 330,
                     child: Image.asset(
                       'assets/images/sspace.png',
                     ),
@@ -131,33 +188,31 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            Container(
-              child: OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30) //모서리
-                      ),
-                  side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Write(),
+            OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30) //모서리
                     ),
-                  );
-                },
-                icon: const Icon(Icons.drive_file_rename_outline_outlined,
-                    size: 30, color: Colors.white),
-                label: const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "교환일기 작성하기",
-                    style: TextStyle(
-                      fontFamily: 'Lotte',
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
+                side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Write(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.drive_file_rename_outline_outlined,
+                  size: 30, color: Colors.white),
+              label: const Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  "교환일기 작성하기",
+                  style: TextStyle(
+                    fontFamily: 'Lotte',
+                    fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -204,9 +259,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
 
 /*
       body: SingleChildScrollView(
