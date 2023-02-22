@@ -41,6 +41,7 @@ dependencies:
   image_picker: ^0.8.6+1
   intl: ^0.18.0
   firebase_auth: ^4.2.2
+  firebase_storage: ^11.0.14
 
 dev_dependencies:
   flutter_test:
@@ -82,10 +83,11 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-  #   - family: Schyler
+  #   - family: 롯데마트드림체
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  #       - asset: fonts/LotteBold.ttf
+  #       - asset: fonts/LotteLight.ttf
+  #       - asset: fonts/LotteMedium.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

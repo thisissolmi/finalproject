@@ -2,7 +2,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dariyproject/auth/Info.dart';
-import './home.dart';
+import 'screen/home.dart';
 import 'package:dariyproject/fontstyle/fontstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -180,6 +180,10 @@ class LoginpartState extends State<Loginpart> {
                   final docSnapshot = await documentReference.get();
                   print(docSnapshot.exists);
                   if (docSnapshot.exists == true) {
+                    final datasnapshot = docSnapshot.data();
+                    UserProvider.user_name = datasnapshot![user_nameFieldName];
+                    UserProvider.partner_name =
+                        datasnapshot[partner_nameFieldName];
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const Homepage()),

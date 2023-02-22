@@ -1,14 +1,18 @@
 import 'dart:developer';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dariyproject/diaryinfo.dart';
+import 'package:dariyproject/auth/Info.dart';
+import 'package:dariyproject/auth/diaryinfo.dart';
+import 'package:dariyproject/screen/moa.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'main.dart';
-import 'fontstyle/fontstyle.dart';
+import '../main.dart';
+import '../fontstyle/fontstyle.dart';
 import 'readpage.dart';
 import 'package:intl/intl.dart';
 import 'home.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Write extends StatelessWidget {
   const Write({super.key});
@@ -19,9 +23,9 @@ class Write extends StatelessWidget {
       home: Scaffold(
         backgroundColor: const Color(0xff0A0028),
         appBar: AppBar(
-          title: const Text(
-            '진세진님의 교환일기',
-            style: TextStyle(
+          title: Text(
+            '${UserProvider.user_name} 님의 교환일기',
+            style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white),
           ),
           actions: [
@@ -82,6 +86,7 @@ class _ShowDialoginSendingState extends State<ShowDialoginSending> {
               titleFieldName: DataProvider.titles,
               contentFieldName: DataProvider.contents,
               keywordsFieldName: DataProvider.keywords,
+              imageUrlFieldName: DataProvider.imageurl,
             });
             final docSnapshots = await docref.get();
             if (docSnapshots.data() == null) {
@@ -92,11 +97,12 @@ class _ShowDialoginSendingState extends State<ShowDialoginSending> {
             DataProvider.contents = snapshotData[contentFieldName];
             DataProvider.createdTime = snapshotData[createdTimeFieldName];
             DataProvider.keywords = snapshotData[keywordsFieldName];
-
+            DataProvider.createdTime = snapshotData[createdTimeFieldName];
+            DataProvider.imageurl = snapshotData[imageUrlFieldName];
             // ignore: use_build_context_synchronously
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Readpage()),
+              MaterialPageRoute(builder: (context) => const Moa()),
             );
           },
           child: const Text('예'),
@@ -107,7 +113,7 @@ class _ShowDialoginSendingState extends State<ShowDialoginSending> {
 }
 
 class Firebaseprovider {
-  static final mycollection = FirebaseFirestore.instance.collection('diary');
+  static final mycollection = FirebaseFirestore.instance.collection('biginfo');
   static Stream<Iterable<Data>> getAllinfo() {
     return mycollection.snapshots().map((snapshot) =>
         snapshot.docs.map((docSnap) => Data.fromFirebase(docSnap)));
@@ -185,31 +191,33 @@ class Camerapart extends StatefulWidget {
 
 class CamerapartState extends State<Camerapart> {
   File? imagevalue;
-
+  String? imagestirng;
   Future getimage() async {
+    final firebaseStorage = FirebaseStorage.instance;
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) {
       return;
-    }
-    final imageTemp = File(image.path);
-    return setState(() {
+    } else {
+      final imageTemp = File(image.path);
       imagevalue = imageTemp;
-    });
-  }
-
-  Widget showimage() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        color: const Color(0xffd0cece),
-        width: 291,
-        height: 291,
-        child: Center(
-            child: imagevalue == null
-                ? const Text('No image selected.')
-                : Image.file(File(imagevalue!.path))),
-      ),
-    );
+    }
+    if (imagevalue == null) {
+      return;
+    }
+    final tasksnapshot = await firebaseStorage
+        .ref()
+        .child('getimage')
+        .child(DataProvider.titles ?? 'no data title')
+        .putFile(imagevalue!);
+    if (tasksnapshot.ref.getDownloadURL() == null) {
+      return;
+    }
+    var downloadUrl = await tasksnapshot.ref.getDownloadURL();
+    if (downloadUrl.isEmpty) {
+      return;
+    }
+    DataProvider.imageurl = downloadUrl;
+    imagestirng = DataProvider.imageurl;
   }
 
   @override
@@ -227,35 +235,36 @@ class CamerapartState extends State<Camerapart> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 22, 20, 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: const Color(0xff7E7A8F)),
-                height: 291,
-                width: 291,
-                child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        getimage();
-                      });
-                    },
-                    child: imagevalue != null
-                        ? Ink.image(
-                            width: 291,
-                            height: 291,
-                            image: NetworkImage(imagevalue.toString()),
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Icon(
-                                Icons.add_photo_alternate,
-                                size: 50,
-                              ),
-                              Text('사진을 선택해주세요')
-                            ],
-                          )),
+              child: InkWell(
+                onTap: () async {
+                  setState(() {
+                    getimage();
+                  });
+                },
+                child: imagestirng != null
+                    ? Image.network(
+                        DataProvider.imageurl ?? 'no data',
+                        width: 291,
+                        height: 291,
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: const Color(0xff7E7A8F)),
+                        height: 291,
+                        width: 291,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.add_photo_alternate,
+                              size: 50,
+                            ),
+                            Text('사진을 선택해주세요')
+                          ],
+                        ),
+                      ),
               ),
             ),
             const KeywordTextfield(),
@@ -365,3 +374,19 @@ class _WirtecontentState extends State<Wirtecontent> {
     );
   }
 }
+// var docref = FirebaseFirestore.instance.collection('biginfo').doc();
+//     docref.set({
+//       createdTimeFieldName: FieldValue.serverTimestamp(),
+//       'docid': docref.id,
+//       imageUrlFieldName: downloadUrl,
+//     }).then((onValue) {
+//       //정보 인서트후, 상위페이지로 이동
+//       Navigator.pop(context);
+//     });
+//     final docsnapshot = await docref.get();
+//     if (docsnapshot.data() == null) {
+//       return;
+//     }
+//     final datasnapshot = docsnapshot.data()!;
+//     DataProvider.imageurl = datasnapshot[imageUrlFieldName];
+//     log(DataProvider.imageurl ?? 'no data');
