@@ -374,19 +374,3 @@ class _WirtecontentState extends State<Wirtecontent> {
     );
   }
 }
-// var docref = FirebaseFirestore.instance.collection('biginfo').doc();
-//     docref.set({
-//       createdTimeFieldName: FieldValue.serverTimestamp(),
-//       'docid': docref.id,
-//       imageUrlFieldName: downloadUrl,
-//     }).then((onValue) {
-//       //정보 인서트후, 상위페이지로 이동
-//       Navigator.pop(context);
-//     });
-//     final docsnapshot = await docref.get();
-//     if (docsnapshot.data() == null) {
-//       return;
-//     }
-//     final datasnapshot = docsnapshot.data()!;
-//     DataProvider.imageurl = datasnapshot[imageUrlFieldName];
-//     log(DataProvider.imageurl ?? 'no data');

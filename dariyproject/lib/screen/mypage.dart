@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dariyproject/auth/Info.dart';
 import 'package:dariyproject/fontstyle/fontstyle.dart';
+import 'package:dariyproject/login.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
