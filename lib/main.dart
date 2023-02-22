@@ -42,13 +42,14 @@ class Homepage extends StatelessWidget {
   }
 }
 
+/*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: OnBoardingPage(), // onboarding.dart 파일의 OnBoardingPage()를 실행하도록 지정
+      home: Splash(), // onboarding.dart 파일의 OnBoardingPage()를 실행하도록 지정
     );
   }
 }
@@ -91,6 +92,8 @@ class MyPage extends StatelessWidget {
   }
 }
 
+*/
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -104,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: const Color(0xff0A0028),
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 홈화면 (앱바) 에서 뒤로가기 없애는 것임. 
         backgroundColor: const Color(0xff0A0028),
         actions: [
           IconButton(
@@ -174,8 +178,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 350,
-                    width: 350,
+                    height: 330, //원래는 350이야 둘 다
+                    width: 330,
                     child: Image.asset(
                       'assets/images/sspace.png',
                     ),
@@ -184,33 +188,31 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            Container(
-              child: OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30) //모서리
-                      ),
-                  side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Write(),
+            OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30) //모서리
                     ),
-                  );
-                },
-                icon: const Icon(Icons.drive_file_rename_outline_outlined,
-                    size: 30, color: Colors.white),
-                label: const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "교환일기 작성하기",
-                    style: TextStyle(
-                      fontFamily: 'Lotte',
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
+                side: const BorderSide(width: 2.0, color: Color(0xffF6BDE5)),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Write(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.drive_file_rename_outline_outlined,
+                  size: 30, color: Colors.white),
+              label: const Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  "교환일기 작성하기",
+                  style: TextStyle(
+                    fontFamily: 'Lotte',
+                    fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -257,9 +259,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
 
 /*
       body: SingleChildScrollView(

@@ -1,4 +1,6 @@
 //마이페이지 화면 구현. 프로필 화면
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'main.dart';
 import './jaejak.dart';
@@ -34,7 +36,7 @@ class _MypageState extends State<Mypage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 30, 0, 16),
+              padding: const EdgeInsets.fromLTRB(16, 30, 16, 20),
               child: Container(
                 height: 102,
                 width: 343,
@@ -49,24 +51,27 @@ class _MypageState extends State<Mypage> {
                     Row(
                       children: const [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                          padding: EdgeInsets.fromLTRB(30, 25, 20, 20),
                           child: Text(
                             "닉네임",
                             style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                         ),
-                        Text("김태희",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 25, 20, 20),
+                          child: Text("김태희",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ),
                       ],
                     ),
                     Row(
                       children: const [
                         Padding(
                           padding: EdgeInsets.fromLTRB(
-                            20,
+                            30,
                             0,
                             20,
                             0,
@@ -76,12 +81,15 @@ class _MypageState extends State<Mypage> {
                             style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                         ),
-                        Text(
-                          "2023년 2월 14일 ",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
+                          child: Text(
+                            "2023년 2월 14일 ",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -170,12 +178,80 @@ class _MypageState extends State<Mypage> {
                               color: Colors.white,
                             ),
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => Mypage(),
-                              //   ),
-                              // );
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext) {
+                                    return AlertDialog(
+                                      // elevation: 100,
+                                      actionsAlignment:
+                                          MainAxisAlignment.center,
+                                      title: Center(
+                                        child: Column(
+                                          children: const [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10, 0, 10, 5),
+                                              child: Text('로그아웃'),
+                                            ),
+                                            Divider(
+                                              thickness: 2,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      content: const Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(35, 0, 0, 0),
+                                        child: Text('로그아웃 하시겠습니까? '),
+                                      ),
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(24))),
+                                      actions: [
+                                        OutlinedButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(const Mypage());
+                                          },
+                                          child: Text('취소', style: TextStyle()),
+                                          style: OutlinedButton.styleFrom(
+                                              fixedSize: Size(120, 40),
+                                              foregroundColor:
+                                                  Color(0xff8C8F93),
+                                              side: BorderSide(
+                                                color: Color(0xff8C8F93),
+                                                width: 1.0,
+                                              ),
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  21.5)))),
+                                        ),
+                                        OutlinedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('로그아웃'),
+                                            style: OutlinedButton.styleFrom(
+                                                fixedSize: Size(120, 40),
+                                                foregroundColor:
+                                                    Color(0xFFD66ED1),
+                                                side: BorderSide(
+                                                  color: Color(0xFFD66ED1),
+                                                  width: 1.0,
+                                                ),
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    21.5))))),
+                                      ],
+                                    );
+                                  });
                             },
                           ),
                         ],
@@ -191,129 +267,3 @@ class _MypageState extends State<Mypage> {
     );
   }
 }
-
-/*
-cColor.fromARGB(255, 148, 89, 89)             "현재 앱 버전",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-             */
-/*
-
-
-
-import 'package:flutter/material.dart';
-
-class Moa extends StatelessWidget {
-  const Moa({super.key});
-
-  static const String _title = 'Flutter Code Sample';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: _title,
-      home: MyStatelessWidget(),
-    );
-  }
-}
-
-class MyStatelessWidget extends StatelessWidget {
-  Color unselectedColor = Color(0xff0A0028);
-  MyStatelessWidget({super.key});
-  TabBar get _tabBar => TabBar(
-        labelColor: Colors.black,
-        unselectedLabelColor: Colors.grey,
-        //backgroundColor: Colors.white,
-        indicator: BoxDecoration(
-          color: Color(0xffF6BDE5),
-          borderRadius: BorderRadius.circular(200),
-        ),
-        tabs: const [
-          Tab(
-            text: "김태희",
-          ),
-          Tab(text: "송하연"),
-        ],
-      );
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 2,
-      child: Scaffold(
-        backgroundColor: Color(0xff0A0028),
-        appBar: AppBar(
-          title: const Text(
-            '교환일기 모아보기',
-          ),
-          centerTitle: true, // 중앙 정렬
-          elevation: 0.0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: const Color(0xff0A0028),
-          bottom: PreferredSize(
-              preferredSize: _tabBar.preferredSize,
-              child: Container(
-                width: 315,
-                height: 60,
-                decoration: BoxDecoration(
-                    border: Border.all(color: unselectedColor, width: 1),
-                    color: unselectedColor,
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1.0, color: Color(0xffF6BDE5)),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: _tabBar),
-              )),
-        ),
-        body: Row(
-          children: [
-            Text("총 @개", style: TextStyle(color: Colors.white, fontSize: 10)),
-            Text("최신순", style: TextStyle(color: Colors.white, fontSize: 10)),
-          ],
-        ),
-        // //const TabBarView(
-        //   children: <Widget>[
-        //     Center(
-        //       child: Text(
-        //         "User 1",
-        //         style: TextStyle(color: Colors.white),
-        //       ),
-        //     ),
-        //     Card(
-        //       // shape: RoundedRectangleBorder(
-        //       //   borderRadius: BorderRadius.circular(16.0),
-        //       // ),
-        //       elevation: 4.0, //그림자 깊이
-        //       child: Icon(
-        //         Icons.face,
-        //         color: Colors.grey,
-        //         size: 200,
-        //       ),
-        //     ),
-        //     Center(
-        //       child: Text(
-        //         "User 2",
-        //         style: TextStyle(color: Colors.white),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-      ),
-    );
-  }
-}
- */
-

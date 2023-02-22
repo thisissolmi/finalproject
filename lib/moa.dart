@@ -90,7 +90,7 @@ class _DiaryListPageState extends State<DiaryListPage> {
         // body: Row(
         //   children: const [
         //     Padding(
-        //       padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
+        //       padding: EdgeInsets.fromLTRB(30, 30, 0, 0),git
         //       child: SizedBox(
         //           child: Text(
         //         "총 0개",
@@ -106,6 +106,8 @@ class _DiaryListPageState extends State<DiaryListPage> {
         //   ],
 
         // ),
+        //일기 데이터 불러와서 값 집어넣기.
+
         body: const TabBarView(
           children: <Widget>[
             Center(

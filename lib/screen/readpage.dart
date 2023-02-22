@@ -1,14 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:dariyproject/diarydata.dart';
+import '/auth/diaryinfo.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'main.dart';
-import 'fontstyle/fontstyle.dart';
+import '../fontstyle/fontstyle.dart';
 import 'write.dart';
-import 'package:intl/intl.dart';
-import './diarydata.dart';
+import 'home.dart';
+import 'moa.dart';
 
 class Readpage extends StatelessWidget {
   const Readpage({super.key});
@@ -26,12 +22,9 @@ class Readpage extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () => showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => const ShowDialoginSending(),
-              ),
+              onPressed: () {},
               child: Text(
-                "보내기",
+                "수정하기",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -54,34 +47,6 @@ class Readpage extends StatelessWidget {
         ),
         body: const TopReadpage(),
       ),
-    );
-  }
-}
-
-class ShowDialoginSending extends StatefulWidget {
-  const ShowDialoginSending({super.key});
-
-  @override
-  State<ShowDialoginSending> createState() => _ShowDialoginSendingState();
-}
-
-class _ShowDialoginSendingState extends State<ShowDialoginSending> {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('저장 할 건가요?'),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.pop(context, '아니요'),
-          child: const Text('아니요'),
-        ),
-        TextButton(
-          onPressed: () {
-            //firestore에 저장되게 끔
-          },
-          child: const Text('예'),
-        ),
-      ],
     );
   }
 }
@@ -117,7 +82,7 @@ class _TopReadpageState extends State<TopReadpage> {
           child: Text(DataProvider.createdTime.toString()),
         ),
         const ReadCamerapart(),
-        const Wirtecontent(),
+        const Readcontent(),
       ],
     );
   }
@@ -148,19 +113,19 @@ class _ReadCamerapartState extends State<ReadCamerapart> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 22, 20, 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: const Color(0xff7E7A8F)),
-                height: 291,
-                width: 291,
-                child: getimage.imagevalue != null
-                    ? Ink.image(
-                        width: 291,
-                        height: 291,
-                        image: NetworkImage(getimage.imagevalue.toString()),
-                      )
-                    : Column(
+              child: DataProvider.imageurl != null
+                  ? Image.network(
+                      DataProvider.imageurl ?? 'no data',
+                      width: 291,
+                      height: 291,
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: const Color(0xff7E7A8F)),
+                      height: 291,
+                      width: 291,
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [
@@ -171,9 +136,9 @@ class _ReadCamerapartState extends State<ReadCamerapart> {
                           Text('사진을 선택해주세요')
                         ],
                       ),
-              ),
+                    ),
             ),
-            const KeywordTextfield(),
+            const KeywordTextfield()
           ],
         ),
       ),
@@ -220,7 +185,6 @@ class _KeywordTextfieldState extends State<KeywordTextfield> {
   }
 
   Widget keywordlist(int index) {
-    log(DataProvider.keywords![index]);
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
@@ -263,14 +227,14 @@ Widget keywordbox(String str) {
   );
 }
 
-class Wirtecontent extends StatefulWidget {
-  const Wirtecontent({super.key});
+class Readcontent extends StatefulWidget {
+  const Readcontent({super.key});
 
   @override
-  State<Wirtecontent> createState() => _WirtecontentState();
+  State<Readcontent> createState() => _ReadcontentState();
 }
 
-class _WirtecontentState extends State<Wirtecontent> {
+class _ReadcontentState extends State<Readcontent> {
   @override
   Widget build(BuildContext context) {
     return Padding(
