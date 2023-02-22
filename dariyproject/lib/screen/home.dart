@@ -2,11 +2,12 @@ import 'package:dariyproject/auth/Info.dart';
 import 'package:dariyproject/fontstyle/fontstyle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import './mypage.dart';
-import './write.dart';
-import './moa.dart';
-import 'auth/singuppage.dart';
+import 'mypage.dart';
+import 'write.dart';
+import '../auth/singuppage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'write.dart';
+import '/screen/moa.dart';
 
 //home 화면
 class Homepage extends StatelessWidget {
@@ -63,25 +64,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "${UserProvider.user_name.toString()}님",
+                    "${UserProvider.user_name}님",
                     style: homepagecouple,
                   ),
                   const Text(' ❤ '),
-                  Text("${UserProvider.partner_name.toString()}님",
-                      style: homepagecouple),
+                  if (UserProvider.partner_name != null) ...{
+                    Text("${UserProvider.partner_name}님",
+                        style: homepagecouple),
+                  } else
+                    const Text("솔로...", style: homepagecouple),
                 ],
-              ),
-              const Text(
-                '함께 기록한지'
-                '\n'
-                '400(변수)일째',
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 350,

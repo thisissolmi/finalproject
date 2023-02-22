@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Jaejak extends StatefulWidget {
@@ -29,9 +31,10 @@ class _JaejakState extends State<Jaejak> {
       body: Container(
         width: 800,
         height: 700,
-        decoration: const BoxDecoration(
-            image:
-                DecorationImage(image: AssetImage('assets/images/jaejae.png'))),
+        child: const Image(
+          image: NetworkImage(
+              'https://raw.githubusercontent.com/thisissolmi/finalproject/second/assets/images/jaejae.png'),
+        ),
       ),
     );
   }

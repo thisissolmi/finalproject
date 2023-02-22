@@ -7,6 +7,7 @@ class DataProvider {
   static String? image;
   static List? keywords;
   static Data? data;
+  static String? imageurl;
 }
 
 class Data {
@@ -16,6 +17,7 @@ class Data {
   final String? content;
   final String? image;
   final String? docId;
+  final String? imageurl;
 
   Data({
     required this.docId,
@@ -24,6 +26,7 @@ class Data {
     required this.keywords,
     required this.image,
     required this.content,
+    required this.imageurl,
   });
 
   factory Data.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -39,13 +42,13 @@ class Data {
 
   factory Data.fromMap(Map<String, dynamic> map, String? docId) {
     return Data(
-      docId: docId,
-      title: map[titleFieldName],
-      createdTime: map[createdTimeFieldName],
-      image: map[imageUrlFieldName],
-      content: map[contentFieldName],
-      keywords: map[keywordsFieldName],
-    );
+        docId: docId,
+        title: map[titleFieldName],
+        createdTime: map[createdTimeFieldName],
+        image: map[imageUrlFieldName],
+        content: map[contentFieldName],
+        keywords: map[keywordsFieldName],
+        imageurl: map[imageUrlFieldName]);
   }
 }
 
@@ -55,3 +58,11 @@ const String imageUrlFieldName = "image-url";
 const String contentFieldName = "content";
 const String keywordsFieldName = "keywords";
 const String usernameFieldName = "username";
+
+class FirebaseProvider {
+  static final mycollection = FirebaseFirestore.instance.collection('diary');
+  static Stream<Iterable<Data>> getAllInfos() {
+    return mycollection.snapshots().map((snapshot) =>
+        snapshot.docs.map((docSnap) => Data.fromFirebase(docSnap)));
+  }
+}

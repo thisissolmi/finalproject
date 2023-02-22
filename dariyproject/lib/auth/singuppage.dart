@@ -1,6 +1,7 @@
+import 'dart:developer';
 import 'package:dariyproject/auth/Info.dart';
 import 'package:dariyproject/fontstyle/fontstyle.dart';
-import 'package:dariyproject/home.dart';
+import 'package:dariyproject/screen/home.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -247,6 +248,7 @@ class Partnerpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color(0xff0A0028),
         body: Partnertextfield(),
       ),
     );
@@ -263,6 +265,7 @@ class Partnertextfield extends StatefulWidget {
 class _PartnertextfieldState extends State<Partnertextfield> {
   final _authentication = FirebaseAuth.instance;
   String partner_email = '';
+  String partner_name = '';
   final _formkeypart = GlobalKey<FormState>();
   void _tryValidation() {
     final isValid = _formkeypart.currentState!.validate();
@@ -276,40 +279,103 @@ class _PartnertextfieldState extends State<Partnertextfield> {
     return Column(
       children: [
         Form(
-            key: _formkeypart,
-            child: TextFormField(
-              key: const ValueKey(1),
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 5,
-                      color: Colors.white,
+          key: _formkeypart,
+          child: Column(
+            children: [
+              TextFormField(
+                key: const ValueKey(1),
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 5,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  hintText: 'ex)파트너 email이름',
-                  hintStyle: TextStyle(color: Color(0xff9D99A9), fontSize: 17)),
-              validator: ((value) {
-                if (value!.isEmpty || value.length > 2) {
-                  return '최소 3자 이상 적어주세요';
-                }
-                return null;
-              }),
-              onChanged: (value) {
-                partner_email = value;
-              },
-              onSaved: (value) {
-                partner_email = value!;
-              },
-            )),
+                    hintText: 'ex)파트너 Nickname이름',
+                    hintStyle:
+                        TextStyle(color: Color(0xff9D99A9), fontSize: 17)),
+                validator: ((value) {
+                  if (value!.isEmpty || value.length > 2) {
+                    return '최소 3자 이상 적어주세요';
+                  }
+                  return null;
+                }),
+                onChanged: (value) {
+                  partner_name = value;
+                },
+                onSaved: (value) {
+                  partner_name = value!;
+                },
+              ),
+              TextFormField(
+                key: const ValueKey(2),
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 5,
+                        color: Colors.white,
+                      ),
+                    ),
+                    hintText: 'ex)파트너 email이름',
+                    hintStyle:
+                        TextStyle(color: Color(0xff9D99A9), fontSize: 17)),
+                validator: ((value) {
+                  if (value!.isEmpty || value.length > 2) {
+                    return '최소 3자 이상 적어주세요';
+                  }
+                  return null;
+                }),
+                onChanged: (value) {
+                  partner_email = value;
+                },
+                onSaved: (value) {
+                  partner_email = value!;
+                },
+              ),
+            ],
+          ),
+        ),
         GestureDetector(
             onTap: () async {
-              final db = FirebaseFirestore.instance;
-              final user = FirebaseAuth.instance.currentUser!;
-              final docref = db
+              _tryValidation();
+              final userInfo = FirebaseFirestore.instance
                   .collection('user')
-                  .where(user_emailFieldName, isEqualTo: partner_email)
-                  .get();
+                  .where('user_email', isEqualTo: partner_email)
+                  .snapshots();
+              final isEmpty = await userInfo.isEmpty;
+              if (isEmpty) return;
+              final partneruserID =
+                  (await userInfo.first).docs.first.data()['user_email'];
+              log(partneruserID);
+              await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .update({'partner_email': partneruserID});
+              UserProvider.partner_email = partneruserID;
+
+              final userInfo2 = FirebaseFirestore.instance
+                  .collection('user')
+                  .where('user_name', isEqualTo: partner_name)
+                  .snapshots();
+              final isEmpty2 = await userInfo2.isEmpty;
+              if (isEmpty2) return;
+              final partnerusername =
+                  (await userInfo.first).docs.first.data()['user_name'];
+              log(partnerusername);
+              UserProvider.partner_name = partnerusername;
+              await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .update({'partner_name': partnerusername});
+
+              // ignore_for_file: use_build_context_synchronously
+              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: ((context) => const Homepage())),
+                  (route) => false);
             },
             child: Container(
               width: 100,
