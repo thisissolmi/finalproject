@@ -7,6 +7,7 @@ import '../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Info.dart';
+import 'package:dariyproject/login.dart';
 
 class SignUppage extends StatelessWidget {
   const SignUppage({super.key});
